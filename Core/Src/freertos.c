@@ -23,13 +23,11 @@
 #include "main.h"
 #include "cmsis_os.h"
 
-#include "retarget.h"
-#include <stdio.h>
-#include "i2c_drv.h"
-
 /* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includ`es */
+/* USER CODE BEGIN Includes */
+#include "i2c_drv.h"
 #define RX_BUFFER_SIZE 1
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -140,7 +138,7 @@ void StartDefaultTask(void const * argument)
     //printf("\r\n BMP280 ADDR=%d",addr);
     //i2cdevReadReg_Mul(I2C1, 0x76, 0xD0, 1, rx_buffer);
     //printf("\r\n %d%d%d%d%d",rx_buffer[0],rx_buffer[1],rx_buffer[2],rx_buffer[3],rx_buffer[4]);
-    if(addr == 0x58){
+    if(*result == 0x58){
     	while(1){
 
     		LL_GPIO_TogglePin(GPIOB, GPIO_PIN_3);

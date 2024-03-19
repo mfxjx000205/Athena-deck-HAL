@@ -151,7 +151,6 @@ void i2cdevReadReg_Mul(I2C_TypeDef *I2Cx , uint8_t SlaveAddr_IC , uint8_t target
 		counter++;
 		if( counter == 25000 ) { //150ms
 			Error_Handler();
-			return 0xFF;
 		}
 	}
 
@@ -172,7 +171,6 @@ void i2cdevReadReg_Mul(I2C_TypeDef *I2Cx , uint8_t SlaveAddr_IC , uint8_t target
 		if( counter == 25000){ //150ms
 			LL_I2C_ClearFlag_TXE(I2Cx);
 			Error_Handler();
-			return 0xFF;
 		}
 	}
 
@@ -241,26 +239,24 @@ uint8_t *i2cdevReadRegSeq_DMA(I2C_TypeDef *I2Cx, uint8_t SlaveAddr_IC, uint8_t t
 
 	LL_I2C_HandleTransfer(I2Cx, SlaveAddr_IC, LL_I2C_ADDRSLAVE_7BIT, size ,LL_I2C_MODE_AUTOEND ,LL_I2C_GENERATE_START_READ);
 
-	//I2C wait for : RX REG BUSY
-	while(LL_I2C_IsActiveFlag_RXNE(I2Cx)==RESET);
-
 	//I2C DMA Transfer
-    LL_DMA_SetPeriphAddress(DMA1, LL_DMA_CHANNEL_7, (uint32_t)&I2Cx->RXDR);
-    LL_DMA_SetMemoryAddress(DMA1, LL_DMA_CHANNEL_7, (uint32_t)rx_buffer);
+	LL_DMA_ConfigAddresses(DMA1,
+						   LL_DMA_CHANNEL_7,
+						   LL_I2C_DMA_GetRegAddr(I2C1,LL_I2C_DMA_REG_DATA_RECEIVE),
+						   (uint32_t)rx_buffer,
+						   LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
     LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_7, size);
+    LL_I2C_EnableDMAReq_RX(I2C1);
     LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_7);
+    //Debug problem :	TBD
+    osDelay(1);
+    //TBD: double check if need Stop clear here.
+    LL_I2C_ClearFlag_STOP(I2Cx);
 
-	//I2C wait for : STOP DETECT
-	while(LL_I2C_IsActiveFlag_STOP(I2Cx)==RESET);
-
-	LL_I2C_ClearFlag_STOP(I2Cx);
-    // 返回接收缓冲区指针
     return rx_buffer;
 }
 
 void I2C_DMA_TransferComplete_Callback(void)
 {
-    printf("OK\n");
+    printf("DMA_Cb\r\n");
 }
-
-

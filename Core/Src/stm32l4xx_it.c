@@ -20,6 +20,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32l4xx_it.h"
+#include "i2c_drv.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -178,14 +179,16 @@ void DMA1_Channel6_IRQHandler(void)
   */
 void DMA1_Channel7_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
+	//Judge TX complete
+	    if (LL_DMA_IsActiveFlag_TC7(DMA1))
+	    {
+	        // Clear TX complete
+	        LL_DMA_ClearFlag_TC7(DMA1);
 
-  /* USER CODE END DMA1_Channel7_IRQn 0 */
-
-  /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel7_IRQn 1 */
-}
+	        // callback
+	        I2C_DMA_TransferComplete_Callback();
+	    }
+	}
 
 /**
   * @brief This function handles TIM1 update interrupt and TIM16 global interrupt.
@@ -207,7 +210,7 @@ void TIM1_UP_TIM16_IRQHandler(void)
 void I2C1_EV_IRQHandler(void)
 {
   /* USER CODE BEGIN I2C1_EV_IRQn 0 */
-	I2C_DMA_TransferComplete_Callback();
+
   /* USER CODE END I2C1_EV_IRQn 0 */
 
   /* USER CODE BEGIN I2C1_EV_IRQn 1 */

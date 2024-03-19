@@ -43,6 +43,8 @@ void MX_DMA_Init(void)
   /* DMA controller clock enable */
   LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA1);
 
+  LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_7);
+
   /* DMA interrupt init */
   /* DMA1_Channel6_IRQn interrupt configuration */
   NVIC_SetPriority(DMA1_Channel6_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));

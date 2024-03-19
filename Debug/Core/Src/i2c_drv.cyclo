@@ -1,3 +1,5 @@
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:582:22:LL_I2C_EnableDMAReq_RX	1
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:619:26:LL_I2C_DMA_GetRegAddr	2
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:1552:26:LL_I2C_IsActiveFlag_TXE	2
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:1578:26:LL_I2C_IsActiveFlag_RXNE	2
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:1617:26:LL_I2C_IsActiveFlag_STOP	2
@@ -10,10 +12,9 @@
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_i2c.h:2230:22:LL_I2C_TransmitData8	1
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:552:22:LL_DMA_EnableChannel	1
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:996:22:LL_DMA_SetDataLength	1
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:1084:22:LL_DMA_SetMemoryAddress	1
-../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:1107:22:LL_DMA_SetPeriphAddress	1
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:1049:22:LL_DMA_ConfigAddresses	2
 ../Core/Src/i2c_drv.c:33:9:i2cdevReadReg8	9
 ../Core/Src/i2c_drv.c:97:13:i2cdevWriteReg8	8
 ../Core/Src/i2c_drv.c:143:6:i2cdevReadReg_Mul	8
-../Core/Src/i2c_drv.c:203:10:i2cdevReadRegSeq_DMA	9
-../Core/Src/i2c_drv.c:261:6:I2C_DMA_TransferComplete_Callback	1
+../Core/Src/i2c_drv.c:201:10:i2cdevReadRegSeq_DMA	7
+../Core/Src/i2c_drv.c:259:6:I2C_DMA_TransferComplete_Callback	1
