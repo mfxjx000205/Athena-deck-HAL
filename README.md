@@ -1,4 +1,4 @@
-# Athena-Deck For Crazyflie Prototype
+# Athena-Deck Hardware Abstract Layer
 # Achivement
 ## v0.1
 LL_Wait_I2C
