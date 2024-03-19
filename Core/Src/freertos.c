@@ -120,6 +120,10 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
 /* USER CODE END Header_StartDefaultTask */
+void I2C_DMA_TransferComplete_Callback(void)
+{
+    printf("DMA_Cb\r\n");
+}
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN StartDefaultTask */
@@ -133,7 +137,7 @@ void StartDefaultTask(void const * argument)
 	  osDelay(1000);
     }
     //printf("\r\nHello");
-    uint8_t *result = i2cdevReadRegSeq_DMA(I2C1, 0x76, 0xD0, rx_buffer, RX_BUFFER_SIZE, NULL);
+    uint8_t *result = i2cdevReadRegSeq_DMA(I2C1, 0x76, 0xD0, rx_buffer, RX_BUFFER_SIZE, I2C_DMA_TransferComplete_Callback);
     //addr=i2cdevReadReg8(I2C1, 0x76, 0xD0);
     //printf("\r\n BMP280 ADDR=%d",addr);
     //i2cdevReadReg_Mul(I2C1, 0x76, 0xD0, 1, rx_buffer);

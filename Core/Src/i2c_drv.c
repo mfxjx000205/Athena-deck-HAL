@@ -18,9 +18,12 @@ ErrorStatus i2cdevWriteReg8(I2C_TypeDef *I2Cx , uint8_t SlaveAddr_IC , uint8_t t
 void i2cdevReadReg_Mul(I2C_TypeDef *I2Cx , uint8_t SlaveAddr_IC , uint8_t target_reg, uint8_t size, uint8_t *rx_buffer);
 uint8_t *i2cdevReadRegSeq_DMA(I2C_TypeDef *I2Cx, uint8_t SlaveAddr_IC, uint8_t target_reg, uint8_t *rx_buffer, uint16_t size, DMA_Callback callback);
 ErrorStatus i2cdevWriteRegSeq_DMA();
-extern void I2C1_EV_IRQHandler(void);
-void I2C_DMA_TransferComplete_Callback(void);
 
+//Function Pointer
+typedef void (*DMA_Callback)(void);
+
+//Callback Definition
+DMA_Callback I2C_DMA_RX_callback = NULL;
 
 /*
  * @brief  Read 1 byte from I2C slave's Register
@@ -200,6 +203,7 @@ void i2cdevReadReg_Mul(I2C_TypeDef *I2Cx , uint8_t SlaveAddr_IC , uint8_t target
 
 uint8_t *i2cdevReadRegSeq_DMA(I2C_TypeDef *I2Cx, uint8_t SlaveAddr_IC, uint8_t target_reg, uint8_t *rx_buffer, uint16_t size, DMA_Callback callback)
 {
+	I2C_DMA_RX_callback = callback;
 	//Address process
 	SlaveAddr_IC = SlaveAddr_IC<<1;
 
@@ -256,7 +260,4 @@ uint8_t *i2cdevReadRegSeq_DMA(I2C_TypeDef *I2Cx, uint8_t SlaveAddr_IC, uint8_t t
     return rx_buffer;
 }
 
-void I2C_DMA_TransferComplete_Callback(void)
-{
-    printf("DMA_Cb\r\n");
-}
+

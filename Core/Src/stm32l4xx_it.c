@@ -28,6 +28,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
 extern void I2C_DMA_TransferComplete_Callback(void);
+extern DMA_Callback I2C_DMA_RX_callback;
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
@@ -185,8 +186,10 @@ void DMA1_Channel7_IRQHandler(void)
 	        // Clear TX complete
 	        LL_DMA_ClearFlag_TC7(DMA1);
 
-	        // callback
-	        I2C_DMA_TransferComplete_Callback();
+	        if (I2C_DMA_RX_callback != NULL)
+	        {
+	        	I2C_DMA_RX_callback();
+	        }
 	    }
 	}
 

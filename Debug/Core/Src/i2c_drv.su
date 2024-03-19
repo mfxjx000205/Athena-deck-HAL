@@ -13,8 +13,7 @@
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:552:22:LL_DMA_EnableChannel	24	static
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:996:22:LL_DMA_SetDataLength	32	static
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_dma.h:1049:22:LL_DMA_ConfigAddresses	32	static
-../Core/Src/i2c_drv.c:33:9:i2cdevReadReg8	32	static
-../Core/Src/i2c_drv.c:97:13:i2cdevWriteReg8	32	static
-../Core/Src/i2c_drv.c:143:6:i2cdevReadReg_Mul	40	static
-../Core/Src/i2c_drv.c:201:10:i2cdevReadRegSeq_DMA	40	static
-../Core/Src/i2c_drv.c:259:6:I2C_DMA_TransferComplete_Callback	8	static
+../Core/Src/i2c_drv.c:36:9:i2cdevReadReg8	32	static
+../Core/Src/i2c_drv.c:100:13:i2cdevWriteReg8	32	static
+../Core/Src/i2c_drv.c:146:6:i2cdevReadReg_Mul	40	static
+../Core/Src/i2c_drv.c:204:10:i2cdevReadRegSeq_DMA	40	static
